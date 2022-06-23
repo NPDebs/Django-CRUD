@@ -1,10 +1,9 @@
 from audioop import reverse
 from django.shortcuts import render
 from django.urls import reverse_lazy
-
 from django.views import generic
 
-from I4G003360HPJ.blog.models import Post
+from .models import Post
 
 # Create your views here.
 

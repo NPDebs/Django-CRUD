@@ -16,18 +16,14 @@ class Post(models.Model):
     # DB Fields
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=300, unique=True, editable=False)
-    author = models.ForeignKey(
-        get_user_model(), on_delete=models.CASCADE, related_name="blog_posts"
-    )
+    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="blog_posts")
     body = models.TextField()
 
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    status = models.CharField(
-        max_length=10, choices=STATUS_CHOICES, default="draft"
-    )
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="draft")
 
     class Meta:
         ordering = ("-publish",)
@@ -35,7 +31,7 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
-        pass 
+        pass
 
     def __str__(self):
         return self.title
